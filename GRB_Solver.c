@@ -309,12 +309,12 @@ int add_constrs_by_type(Board *board, GRBenv *env, GRBmodel *model, Options_Boar
 /*add constraints to the model according to the current board state*/
 int add_constraints(GRBenv *env, GRBmodel *model, Options_Board *opts_board, int m, int n, int is_ILP, Board *board){
 	int board_size = m*n;
-	constrs_by_cell(env, model,opts_board,/* val,ind,*/ board);
-	add_constrs_by_type(board, env, model, opts_board, ROW, m, n/* ind, val*/);
-	add_constrs_by_type(board,env, model, opts_board, COL, m, n/* ind, val*/);
-	add_constrs_by_type(board,env, model, opts_board, BLOCK, m, n/* ind, val*/);
+	constrs_by_cell(env, model,opts_board, board);
+	add_constrs_by_type(board, env, model, opts_board, ROW, m, n);
+	add_constrs_by_type(board,env, model, opts_board, COL, m, n);
+	add_constrs_by_type(board,env, model, opts_board, BLOCK, m, n);
 	if(is_ILP == LP){
-		add_range_constrs(env, model, opts_board, /*val, ind,*/ board_size);
+		add_range_constrs(env, model, opts_board,  board_size);
 	}
 
 	return 1;
